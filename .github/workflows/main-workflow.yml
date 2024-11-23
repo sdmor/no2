@@ -37,12 +37,7 @@ jobs:
       with:
         credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
 
-    # Step 5: Test Artifact Registry Access
-    - name: Test Artifact Registry Access
-      run: |
-        gcloud artifacts repositories list --project=no2-app
-
-    # Step 6: Set up Google Cloud SDK
+    # Step 5: Set up Google Cloud SDK
     - name: Set up Google Cloud SDK
       uses: google-github-actions/setup-gcloud@v1
       with:
