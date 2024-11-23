@@ -31,6 +31,24 @@ jobs:
       run: |
         pip install -r requirements.txt
 
-    # Step 4: Deploy to Google Cloud Run (we’ll configure this later)
-    - name: Deploy to Google Cloud Run
-      run: echo "Deploy step placeholder"
+    # Step 4: Authenticate with Google Cloud
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+
+    # Step 5: Set up Google Cloud SDK
+    - name: Set up Google Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        project_id: no2-app  # Replace this with your actual project ID
+        export_default_credentials: true
+
+    # Step 6: Deploy to Google Cloud Run
+    - name: Deploy to Cloud Run
+      run: |
+        gcloud run deploy no2-app-service \
+          --source . \
+          --region us-central1 \
+          --platform managed \
+          --allow-unauthenticated
