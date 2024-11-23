@@ -1,0 +1,36 @@
+name: CI/CD Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:  # Allows manual triggering from GitHub
+  schedule:
+    - cron: '0 2 * * *'  # Runs daily at 2:00 AM UTC
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Check out the repository
+    - name: Check out code
+      uses: actions/checkout@v3
+
+    # Step 2: Set up Python (optional for testing or dependencies)
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    # Step 3: Install dependencies (if needed)
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    # Step 4: Deploy to Google Cloud Run (we’ll configure this later)
+    - name: Deploy to Google Cloud Run
+      run: echo "Deploy step placeholder"
