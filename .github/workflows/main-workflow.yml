@@ -1,13 +1,13 @@
 name: CI/CD Workflow
 
 on:
+  workflow_dispatch:  # Allows manual triggering from GitHub
   push:
     branches:
       - main
   pull_request:
     branches:
       - main
-  workflow_dispatch:  # Allows manual triggering from GitHub
   schedule:
     - cron: '0 2 * * *'  # Runs daily at 2:00 AM UTC
 
