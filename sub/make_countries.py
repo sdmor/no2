@@ -120,7 +120,7 @@ def main(bucket_name, days_folder, countries_folder, geojson_path, start_date, e
         sys.exit(1)
 
 if __name__ == "__main__":
-    if len(sys.argv) != 7:
+    if len(sys.argv) != 8:
         print("Usage: python3 make_countries.py <BUCKET_NAME> <DAYS_FOLDER> <COUNTRIES_FOLDER> <GEOJSON_PATH> <START_DATE: YYYY-MM-DD> <END_DATE: YYYY-MM-DD>")
         sys.exit(1)
 

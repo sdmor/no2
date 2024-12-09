@@ -141,8 +141,8 @@ def process_countries():
 
 def main():
     """Main entry point for the script."""
-    process_dates()
-    #process_countries()
+    #process_dates()
+    process_countries()
 
 
 if __name__ == "__main__":
