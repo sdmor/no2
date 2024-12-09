@@ -122,12 +122,16 @@ def process_dates():
 
 def process_countries():
     """Run make_countries.py to process country-level parquets."""
+    geojson_path = os.path.abspath("geojson/ne_110m_admin_0_countries.geojson")  # Resolve absolute path to GeoJSON
+
+    """Run make_countries.py to process country-level parquets."""
     make_countries_command = [
         "python3",
         "sub/make_countries.py",
         BUCKET_NAME,
         f"{gcs_data_directory}/days",  # GCS folder with day Parquets
         f"{gcs_data_directory}/countries",  # GCS folder for country Parquets
+        geojson_path,
         start_date.strftime("%Y-%m-%d"),
         end_date.strftime("%Y-%m-%d"),
     ]
