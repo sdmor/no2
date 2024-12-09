@@ -8,8 +8,6 @@ on:
   pull_request:
     branches:
       - main
-  schedule:
-    - cron: '0 2 * * *'  # Runs daily at 2:00 AM UTC
 
 jobs:
   build-and-deploy:
@@ -20,18 +18,18 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v3
 
-    # Step 2: Set up Python (optional for testing or dependencies)
+    # Step 2: Set up Python
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.9'
 
-    # Step 3: Install dependencies (if needed)
+    # Step 3: Install dependencies
     - name: Install dependencies
       run: |
         pip install -r requirements.txt
 
-    # Step 4: Authenticate with Google Cloud
+    # Step 4: Authenticate to Google Cloud
     - name: Authenticate to Google Cloud
       uses: google-github-actions/auth@v1
       with:

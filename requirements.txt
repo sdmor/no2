@@ -1,1 +1,13 @@
-flask
+Flask==2.3.2                # Web server for API handling
+gunicorn==20.1.0            # Production WSGI server (needed for Cloud Run)
+google-cloud-storage==2.10.0 # Google Cloud Storage interaction
+pandas==2.1.1               # DataFrame processing
+geopandas==0.13.2           # GeoDataFrame and spatial joins
+h5py==3.9.0                 # Reading .nc files
+pyproj==3.6.0               # Coordinate system transformations
+fiona==1.9.4                # GeoJSON file handling
+shapely==2.0.1              # Geometric operations
+requests==2.31.0            # HTTP requests for data download
+pyarrow==13.0.0             # Parquet file handling
+numpy<2			    # Not all dependencies supported Numpy 2.x as of image build
+pytz			    # To ensure EST used for "now" time

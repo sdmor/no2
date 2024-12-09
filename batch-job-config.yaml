@@ -1,0 +1,23 @@
+---
+name: no2-job
+priority: 1
+taskGroups:
+  - taskSpec:
+      runnables:
+        - container:
+            imageUri: gcr.io/no2-app/no2-app-service
+            entrypoint: python3
+            commands:
+              - date_input.py
+      computeResource:
+        cpuMilli: 8000  # 8 CPUs
+        memoryMib: 32768  # 32GB memory
+    taskCount: 1
+    parallelism: 1
+allocationPolicy:
+  instances:
+    - policy:
+        machineType: n2-standard-8
+        provisioningModel: STANDARD
+logsPolicy:
+  destination: CLOUD_LOGGING
