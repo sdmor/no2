@@ -21,33 +21,50 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v3
 
-    # Step 2: Set up Python (if needed for other steps)
+    # Step 2: Set up Python
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.9'
 
-    # Step 3: Authenticate to Google Cloud
+    # Step 3: Install dependencies
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    # Step 4: Set up Docker Buildx
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    # Step 5: Build and push Docker image
+    - name: Build and push Docker image
+      env:
+        DOCKER_CLI_EXPERIMENTAL: enabled
+        DOCKER_BUILDKIT: 1
+      run: |
+        docker buildx build --platform linux/amd64,linux/arm64 \
+          -t gcr.io/no2-app/no2-app-service:latest . \
+          --push
+
+    # Step 6: Authenticate to Google Cloud
     - name: Authenticate to Google Cloud
       uses: google-github-actions/auth@v1
       with:
         credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
 
-    # Step 4: Set up Google Cloud SDK
+    # Step 7: Set up Google Cloud SDK
     - name: Set up Google Cloud SDK
       uses: google-github-actions/setup-gcloud@v1
       with:
         project_id: no2-app 
         export_default_credentials: true
 
-    # Step 5: Build and Push Docker Image
-    - name: Build and push Docker image
+    # Step 8: Delete Previous Batch Job (if exists)
+    - name: Delete Previous Batch Job
       run: |
-        docker buildx build --platform linux/amd64,linux/arm64 \
-          -t gcr.io/no2-app/no2-app-service:latest . \
-          --push
+        gcloud batch jobs delete no2-job --location us-east1 --quiet || true
 
-    # Step 6: Submit the Batch Job
+    # Step 9: Submit the Batch Job
     - name: Submit Batch Job
       run: |
         gcloud batch jobs submit no2-job \
