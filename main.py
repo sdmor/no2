@@ -131,17 +131,18 @@ def process_countries():
         start_date.strftime("%Y-%m-%d"),
         end_date.strftime("%Y-%m-%d"),
     ]
+
     try:
-        subprocess.run(make_countries_command, check=True)
+        subprocess.run(make_countries_command, check=True, capture_output=True, text=True)
         print("make_countries.py executed successfully.")
     except subprocess.CalledProcessError as e:
         print(f"Error running make_countries.py: {e}")
-
+        print(f"Command output:\n{e.stderr}")
 
 def main():
     """Main entry point for the script."""
     process_dates()
-    process_countries()
+    #process_countries()
 
 
 if __name__ == "__main__":
