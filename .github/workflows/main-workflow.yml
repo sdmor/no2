@@ -62,7 +62,6 @@ jobs:
       uses: google-github-actions/setup-gcloud@v1
       with:
         project_id: no2-app 
-        export_default_credentials: true
 
     # Step 9: Delete Previous Batch Job (if exists)
     - name: Delete Previous Batch Job
