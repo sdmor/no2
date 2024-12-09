@@ -91,7 +91,9 @@ def main(bucket_name, days_folder, countries_folder, geojson_path, start_date, e
                     print(f"Processing Parquet file: {blob.name}")
                     process_parquet_in_chunks(blob, bucket, countries_folder, world)
                 except Exception as e:
+                    import traceback
                     print(f"Error processing Parquet file {blob.name}: {e}")
+                    traceback.print_exc()
 
 if __name__ == "__main__":
     if len(sys.argv) != 7:
