@@ -21,40 +21,33 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v3
 
-    # Step 2: Set up Python
+    # Step 2: Set up Python (if needed for other steps)
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.9'
 
-    # Step 3: Install dependencies
-    - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
-
-    # Step 4: Authenticate to Google Cloud
+    # Step 3: Authenticate to Google Cloud
     - name: Authenticate to Google Cloud
       uses: google-github-actions/auth@v1
       with:
         credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
 
-    # Step 5: Set up Google Cloud SDK
+    # Step 4: Set up Google Cloud SDK
     - name: Set up Google Cloud SDK
       uses: google-github-actions/setup-gcloud@v1
       with:
         project_id: no2-app 
         export_default_credentials: true
 
-    # Step 6: Deploy to Google Cloud Run
-    - name: Deploy to Cloud Run
+    # Step 5: Build and Push Docker Image
+    - name: Build and push Docker image
       run: |
-        gcloud run deploy no2-app-service \
-          --source . \
-          --region us-central1 \
-          --platform managed \
-          --allow-unauthenticated
+        docker buildx build --platform linux/amd64,linux/arm64 \
+          -t gcr.io/no2-app/no2-app-service:latest . \
+          --push
 
-    # Step 7: Submit the Batch Job
+    # Step 6: Submit the Batch Job
     - name: Submit Batch Job
       run: |
         gcloud batch jobs submit no2-job \
