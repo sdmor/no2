@@ -68,7 +68,15 @@ jobs:
       run: |
         gcloud batch jobs delete no2-job --location us-east1 --quiet || echo "No previous job to delete"
 
-    # Step 10: Submit the Batch Job
+    # Step 10: Wait for Deletion to Complete
+    - name: Wait for Batch Job Deletion
+      run: |
+        while gcloud batch jobs describe no2-job --location us-east1 &>/dev/null; do
+          echo "Waiting for no2-job to be fully deleted..."
+          sleep 5
+        done
+
+    # Step 11: Submit the Batch Job
     - name: Submit Batch Job
       run: |
         gcloud batch jobs submit no2-job \
