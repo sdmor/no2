@@ -45,7 +45,7 @@ jobs:
     # Step 6: Authenticate Docker with GCR
     - name: Authenticate Docker with GCR
       run: |
-        gcloud auth configure-docker --quiet
+        gcloud auth configure-docker gcr.io --quiet
 
     # Step 7: Build and push Docker image
     - name: Build and push Docker image
