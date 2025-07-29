@@ -1,0 +1,2 @@
+polars>=0.20
+google-cloud-storage>=2.10
