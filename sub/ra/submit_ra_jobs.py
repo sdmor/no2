@@ -13,8 +13,8 @@ REPO = "fastapi-repo"
 IMAGE = f"{REGION}-docker.pkg.dev/{PROJECT}/{REPO}/compute-ra-single"
 SCRIPT = "/app/compute_ra_single_day.py"
 TMP_YAML_DIR = "tmp_yaml"
-MAX_PARALLEL = 5  # still used for local thread cap
-MAX_RUNNING_JOBS = 5
+MAX_PARALLEL = 10  # still used for local thread cap
+MAX_RUNNING_JOBS = 10
 
 os.makedirs(TMP_YAML_DIR, exist_ok=True)
 
