@@ -76,9 +76,17 @@ jobs:
           sleep 5
         done
 
-    # Step 11: Submit the Batch Job
+    # Step 11: Submit Download Batch Job
     - name: Submit Batch Job
       run: |
         gcloud batch jobs submit no2-job \
           --location us-east1 \
           --config batch-job-config.yaml
+
+    # Step 12: Submit the Rolling Average Batch Job
+    - name: 🚀 Submit rolling average jobs for last 11 days
+      run: |
+        today=$(date -u +%Y%m%d)
+        start=$(date -u -d "$today - 11 days" +%Y%m%d)
+        end=$(date -u -d "$today - 1 day" +%Y%m%d)
+        python sub/ra/submit_ra_jobs.py $start $end 4
