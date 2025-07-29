@@ -13,14 +13,14 @@ OUTPUT_PREFIX = "data/rolling_avgs/"
 # ──────────────── Helpers ────────────────
 
 def bin_coord(expr, step=0.1):
-    return (expr // step) * step
+    return (expr / step).round() * step
 
 def load_daily_parquet(blob):
     print(f"📅 Downloading {blob.name}")
     content = blob.download_as_bytes()
     df = pl.read_parquet(BytesIO(content))
 
-    df = df.filter(pl.col("qa_value") > 0.75)
+    df = df.filter(pl.col("qa_value") > 0.5)
     df = df.with_columns([
         bin_coord(pl.col("latitude"), 0.1).alias("lat_bin"),
         bin_coord(pl.col("longitude"), 0.1).alias("lon_bin"),
@@ -38,7 +38,7 @@ def compute_7day_rolling(df):
     df = df.sort(["lat_bin", "lon_bin", "date"])
     df = df.with_columns(
         pl.col("no2")
-        .rolling_mean(window_size=7, min_samples=7)
+        .rolling_mean(window_size=7, min_samples=1)
         .over(["lat_bin", "lon_bin"])
         .alias("no2_ra")
     )
