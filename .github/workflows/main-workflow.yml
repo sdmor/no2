@@ -87,6 +87,6 @@ jobs:
     - name: 🚀 Submit rolling average jobs for last 11 days
       run: |
         today=$(date -u +%Y%m%d)
-        start=$(date -u -d "$today - 16 days" +%Y%m%d)
+        start=$(date -u -d "$today - 11 days" +%Y%m%d)
         end=$(date -u -d "$today - 1 day" +%Y%m%d)
         python sub/ra/submit_ra_jobs.py $start $end 4
