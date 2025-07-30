@@ -32,4 +32,4 @@ jobs:
 
     - name: Submit Backfill Jobs
       run: |
-        python sub/ra/submit_ra_jobs.py 20220908 20250630 8
+        python sub/ra/submit_ra_jobs.py 20250225 20250630 8
