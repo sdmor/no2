@@ -12,5 +12,4 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy app code
-COPY compute_ra.py .
 COPY compute_ra_single_day.py .
