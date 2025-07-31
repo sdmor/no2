@@ -83,7 +83,25 @@ jobs:
           --location us-east1 \
           --config batch-job-config.yaml
 
-    # Step 12: Submit the Rolling Average Batch Job
+    # Step 12: Wait for Download Batch Job to Finish
+    - name: ⏳ Wait for download batch job to complete
+      run: |
+        echo "Waiting for batch job 'no2-job' to complete..."
+        while true; do
+          status=$(gcloud batch jobs describe no2-job --location us-east1 --format='value(status.state)')
+          echo "Current job status: $status"
+          if [[ "$status" == "SUCCEEDED" ]]; then
+            echo "Download job completed successfully."
+            break
+          elif [[ "$status" == "FAILED" || "$status" == "DELETION_IN_PROGRESS" ]]; then
+            echo "Download job failed or is being deleted."
+            exit 1
+          else
+            sleep 30
+          fi
+        done
+
+    # Step 13: Submit the Rolling Average Batch Job
     - name: 🚀 Submit rolling average jobs for last 11 days
       run: |
         today=$(date -u +%Y%m%d)
