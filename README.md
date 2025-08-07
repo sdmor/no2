@@ -1,6 +1,6 @@
 # Global NO₂ Monitoring & Anomaly Detection Platform
 
-A scalable, end-to-end platform for detecting, analyzing, and visualizing global nitrogen dioxide (NO₂) anomalies using global daily satellite (TROPOMI)-based measurements on 0.1° × 0.1° grid of entire surface of habitable Earth.
+A scalable, end-to-end platform for detecting, analyzing, and visualizing global nitrogen dioxide (NO₂) anomalies using global daily satellite (TROPOMI)-based measurements on 0.1° × 0.1° grid of entire surface of habitable Earth from 2018 (~12.5 TB raw data as of August, 2025). 
 
 ---
 
