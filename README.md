@@ -4,7 +4,7 @@ A scalable, end-to-end platform for detecting, analyzing, and visualizing global
 
 ---
 
-## 🚀 Overview
+## Overview
 
 This project ingests daily satellite NO₂ data, processes it into geospatial and country-level formats, computes rolling averages and anomalies, and exposes the data via an API and interactive frontend.
 
@@ -12,7 +12,7 @@ It combines modern **data engineering**, **cloud infrastructure**, and **data sc
 
 ---
 
-## 🧠 Key Features
+## Key Features
 
 - **Daily Global NO₂ Ingestion** from ESA/TEMIS datasets
 - **ETL Pipelines** for transforming raw data into:
@@ -31,7 +31,7 @@ It combines modern **data engineering**, **cloud infrastructure**, and **data sc
 
 ---
 
-## 🧰 Tech Stack
+## Tech Stack
 
 | Area              | Tools / Technologies                         |
 |-------------------|----------------------------------------------|
@@ -45,7 +45,7 @@ It combines modern **data engineering**, **cloud infrastructure**, and **data sc
 
 ---
 
-## 📈 Project Architecture
+## Project Architecture
 
          ┌──────────────────────────┐
          │   Daily NO₂ Satellite   │
@@ -70,19 +70,7 @@ It combines modern **data engineering**, **cloud infrastructure**, and **data sc
          │   React Frontend UI   │
          └───────────────────────┘
 
-## 📂 Repository Structure
-
-├── sub/                  # Submodules for ingestion, rolling avg, etc.
-│   ├── ingest/           # Download and format raw NO₂ data
-│   ├── ra/               # Rolling average computation (Cloud Batch)
-│   └── anomalies/        # Future anomaly detection models
-├── api/                  # FastAPI backend
-├── site-frontend/        # React frontend app
-├── .github/workflows/    # GitHub Actions for CI/CD
-├── Dockerfile            # Docker image for API or jobs
-└── README.md
-
-# ✅ What This Project Demonstrates
+# What This Project Demonstrates
 Cloud-native data workflows from ingestion to visualization
 
 End-to-end ownership of a real-time production system
@@ -95,7 +83,7 @@ GCP, Python, SQL, and JavaScript (React) — full-stack technical range
 
 Ability to translate raw data into insight via anomaly detection and visualization
 
-# 📎 Use Cases
+# Use Cases
 Real-time environmental monitoring
 
 Economic activity estimation from emissions
@@ -104,14 +92,14 @@ AI-based alert systems for pollution spikes
 
 Geospatial data engineering at global scale
 
-# 🔐 Status: August 7, 2025
+# Status: August 7, 2025
 Live daily updates running in production
 
 Backfills completed for May 1, 2018 – present
 
 Frontend and API under construction 
 
-# 🧑‍💼 Contact
+# Contact
 Stephen Morris
 PhD Economist | Data Scientist | Cloud Engineer
 [LinkedIn](https://www.linkedin.com/in/stephen-morris-b37931373/)
