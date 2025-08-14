@@ -42,26 +42,26 @@ jobs:
       with:
         credentials_json: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
 
-    # Step 6: Authenticate Docker with GCR
+    # Step 6: Set up Google Cloud SDK 
+    - name: Set up Google Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        project_id: no2-app
+
+    # Step 7: Authenticate Docker with GCR
     - name: Authenticate Docker with GCR
       run: |
         gcloud auth configure-docker gcr.io --quiet
 
-    # Step 7: Build and push Docker image
+    # Step 8: Build and push Docker image
     - name: Build and push Docker image
       env:
         DOCKER_CLI_EXPERIMENTAL: enabled
         DOCKER_BUILDKIT: 1
       run: |
-        docker buildx build --platform linux/amd64,linux/arm64 \
+        docker buildx build --platform linux/amd64 \
           -t gcr.io/no2-app/no2-app-service:latest . \
           --push
-
-    # Step 8: Set up Google Cloud SDK
-    - name: Set up Google Cloud SDK
-      uses: google-github-actions/setup-gcloud@v1
-      with:
-        project_id: no2-app 
 
     # Step 9: Delete Previous Batch Job (if exists)
     - name: Delete Previous Batch Job
